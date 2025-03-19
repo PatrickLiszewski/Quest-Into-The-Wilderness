@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Path of Stealth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="container">
+        <h1>The Path of Stealth</h1>
+        <p>To successfully navigate the Path of Stealth, you must choose your actions carefully. Select the correct sequence of actions to avoid detection and reach your objective.</p>
+        <!-- Actions -->
+        <div class="stealth-option" data-action="hide">Hide in the shadows</div>
+        <div class="stealth-option" data-action="run">Run quickly to the next cover</div>
+        <div class="stealth-option" data-action="distract">Create a distraction</div>
+        <div class="stealth-option" data-action="wait">Wait for the right moment</div>
+        <!-- Buttons -->
+        <button id="checkSequence">Check Sequence</button>
+        <button id="reset">Reset!</button>
+        <script>
+        const correctSequence = ['hide', 'wait', 'distract'];
+        let userSequence = [];
+
+        document.querySelectorAll(".stealth-option").forEach(option => {
+            option.addEventListener("click", function() {
+                this.style.backgroundColor = "#a0c4ff"; // Indicate selection
+                userSequence.push(this.getAttribute("data-action"));
+            });
+        });
+
+        document.getElementById("checkSequence").addEventListener("click", function() {
+            if (userSequence.length === correctSequence.length && userSequence.every((val, index) => val === correctSequence[index])) {
+                alert("Success! You have navigated the Path of Stealth.");
+                window.location.href = "page6.html";
+            } else {
+                alert("You were detected! Try again.");
+                reset();
+            }
+        });
+
+        document.getElementById("reset").addEventListener("click", function() {
+            userSequence = [];
+            document.querySelectorAll(".stealth-option").forEach(option => {
+                option.style.backgroundColor = "#f0f0f0"; // Reset background color
+            });
+        });
+        </script>
+    </section>
+</body>
+</html>
